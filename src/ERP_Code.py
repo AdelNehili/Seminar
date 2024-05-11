@@ -37,7 +37,7 @@ def edit_distance_with_real_penalty_string(source, target, gap_value=0):
     print_matrix(dist, source, target)
     
     return dist[n][m]
-def minimum_edit_cost(source, target, gap_value=0):
+def minimum_edit_cost(source, target):
     n = len(source)
     m = len(target)
     
@@ -87,7 +87,7 @@ def edit_distance_with_real_penalty_timeSeries(source, target, gap_value=0):
     for j in range(1, m + 1):
         dist[0][j] = dist[0][j - 1] + abs(gap_value - target[j - 1])
     
-    print_matrix(dist, source, target)
+
 
     # Populate the distance matrix
     for i in range(1, n + 1):
@@ -100,8 +100,6 @@ def edit_distance_with_real_penalty_timeSeries(source, target, gap_value=0):
             dist[i][j] = min(dist[i - 1][j] + cost_del,    # Deletion, We use the horizontal path
                              dist[i][j - 1] + cost_ins,    # Insertion, We use the vertical path
                              dist[i - 1][j - 1] + cost_sub) # Substitution, We use the diaganole path
-    print_matrix(dist, source, target)
-    
     return dist[n][m]
 
 #________________________________Testing part
@@ -111,11 +109,11 @@ def test_erp_string_comparaison():
     # Example usage
     source = "azced"
     target = "abcdef"
-    gap_value = 0  # Assuming gap_value is zero for simplicity in this example
+    gap_value = 100  # Assuming gap_value is zero for simplicity in this example
 
 
 
-    print("Minimum edit cost:",minimum_edit_cost(source, target, gap_value))
+    print("Minimum edit cost:",minimum_edit_cost(source, target))
     #print("________________________________________________________________________________________________________________\n\n")
     print("Minimum edit distance:",edit_distance_with_real_penalty_string(source, target, gap_value))
 
@@ -128,5 +126,3 @@ def test_erp_series():
     erp_V1 = edit_distance_with_real_penalty_timeSeries(A,B,gap_value)
 
     print(f"edit_distance_with_real_penalty_timeSeries : {erp_V1}")
-
-test_erp_string_comparaison()

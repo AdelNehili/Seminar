@@ -1,3 +1,6 @@
+from dtaidistance import dtw
+
+#DTW MANUAL implementation
 def dtw_distance(sequence_a, sequence_b, dist=lambda x, y: abs(x - y)):
     n, m = len(sequence_a), len(sequence_b)
     # Create the cost matrix
@@ -23,36 +26,35 @@ def dtw_distance(sequence_a, sequence_b, dist=lambda x, y: abs(x - y)):
     return dtw_matrix[-1][-1]
 
 
-def DTW_inequality_ex(A,B,C):
+#Properties testing
+def manual_DTW_inequality_ex(A,B,C):
 
-
+    print("Testing DTW manual implementation : Does it respect the 'Triangle Inequality'?")
     # Calculate DTW distances
     distance_AB = dtw_distance(A, B)
     distance_BC = dtw_distance(B, C)
     distance_AC = dtw_distance(A, C)
 
     # Print distances
-    print("DTW Distance A to B:", distance_AB)
-    print("DTW Distance B to C:", distance_BC)
-    print("DTW Distance A to C:", distance_AC)
+    print("\tDTW Distance |AB|:", distance_AB)
+    print("\tDTW Distance |BC|:", distance_BC)
+    print("\tDTW Distance |AC|:", distance_AC)
 
-# Example usage with integer sequences
-sequence_a = [1, 2, 3, 4, 5]
-sequence_b = [2, 3, 4, 5, 6]
+    result = distance_AC<=distance_AB+distance_BC
+    print(f"\tDoes |AC| <= |AB|+|BC| : {result}\n")
+def lib_DTW_inequality_ex(A,B,C):
 
+    print("Testing DTW library implementation : Does it respect the 'Triangle Inequality'?")
+    # Calculate DTW distances
+    distance_AB = dtw.distance(A, B)
+    distance_BC = dtw.distance(B, C)
+    distance_AC = dtw.distance(A, C)
 
-A =[0,1,1,2]
-B=[0,1,2]
-C=[0,2,2]
+    # Print distances
+    print("\tDTW Distance |AB|:", distance_AB)
+    print("\tDTW Distance |BC|:", distance_BC)
+    print("\tDTW Distance |AC|:", distance_AC)
 
+    result = distance_AC<=distance_AB+distance_BC
+    print(f"\tDoes |AC| <= |AB+BC| : {result}\n")
 
-# Calculate the DTW distances manually using the defined function
-distance_AB = dtw.distance(A, B)
-distance_BC = dtw.distance(B, C)
-distance_AC = dtw.distance(A, C)
-
-print(f"distance_AB : {distance_AB}")
-print(f"distance_BC : {distance_BC}")
-print(f"distance_AC : {distance_AC}")
-
-print(f"Does AC <= AB+BC : {distance_AC<=distance_AB+distance_BC}")

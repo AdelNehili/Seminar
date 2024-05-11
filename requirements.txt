@@ -1,0 +1,3 @@
+dtaidistance
+pandas
+numpy
