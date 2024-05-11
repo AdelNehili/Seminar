@@ -2,6 +2,7 @@ from src import ERP_Code as erp_C
 from src import DTW_Code as dtw_c
 import pandas as pd
 
+#__________________Properties__________________#
 def show_non_metric_DTW():
     """
         This function aims to show a case of Non triangularity-inequality.
@@ -15,8 +16,7 @@ def show_non_metric_DTW():
     dtw_c.lib_DTW_inequality_ex(A,B,C)
     dtw_c.manual_DTW_inequality_ex(A,B,C)
 
-
-
+#__________________ERP/DTW Calls__________________#
 def DTW_lib_algo(data_path_A,data_path_B,sep=";",aimed_column_A = "value1",aimed_column_B = "value1"):
     serie_A = pd.read_csv(data_path_A,sep=sep)
     serie_A = serie_A[aimed_column_A]
@@ -27,7 +27,6 @@ def DTW_lib_algo(data_path_A,data_path_B,sep=";",aimed_column_A = "value1",aimed
 
     distance = dtw_c.dtw.distance(serie_A, serie_B)
     return distance
-    
 def DTW_manual_algo(data_path_A,data_path_B,sep=";",aimed_column_A = "value1",aimed_column_B = "value1"):
     serie_A = pd.read_csv(data_path_A,sep=sep)
     serie_A = serie_A[aimed_column_A]
@@ -37,7 +36,6 @@ def DTW_manual_algo(data_path_A,data_path_B,sep=";",aimed_column_A = "value1",ai
 
     distance = dtw_c.dtw_distance(serie_A, serie_B)
     return distance
-
 def ERP_manual_algo(gap_value,data_path_A,data_path_B,sep=";",aimed_column_A = "value1",aimed_column_B = "value1"):
     serie_A = pd.read_csv(data_path_A,sep=sep)
     serie_A = serie_A[aimed_column_A]
@@ -49,11 +47,12 @@ def ERP_manual_algo(gap_value,data_path_A,data_path_B,sep=";",aimed_column_A = "
     return distance
 
 
+#__________________Main__________________#
 aimed_column_A = "value1"
 aimed_column_B = "value1"
 
-serie_A = "data\serie_A.csv"
-serie_B = "data\serie_B.csv"
+serie_A = "data/serie_A.csv"
+serie_B = "data/serie_B.csv"
 
 distance = ERP_manual_algo(0,serie_A,serie_B,sep=";",aimed_column_A=aimed_column_A,aimed_column_B=aimed_column_B)
 print(f"distance : {distance}")
