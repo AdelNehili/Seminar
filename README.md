@@ -20,8 +20,6 @@ pip install -r requirements.txt
 The project is structured as follows:
 
 - root/: Contains core project files.
-  - `.gitignore`: Configuration file to instruct Git on which files to ignore.
-  - `README.md`: Project description and instructions.
   - `main_dtw_erp.py`: Script for ERP/DTW testing of CSV files from `./data/`.
   - `main_twed.ipynb`: Jupyter notebook for testing TWED coding.
   - `utils.py`: Utility functions used throughout the project.
